@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 
 namespace Stopwatch
 {
@@ -32,33 +33,74 @@ namespace Stopwatch
             return _stopTime - _startTime;
         }
 
-//        private static void ParseCommands(string? command)
-//        {
-//            switch (command?.ToLower())
-//            {
-//                case "start":
-//                    Start();
-//                    break;
-//                case "stop":
-//                    Stop();
-//                    break;
-//                case "show":
-//                    ShowTime();
-//                    break;
-//                case "exit":
-//                    Console.WriteLine("Seeya, bro!");
-//                    Environment.Exit(0);
-//                    break;
-//                default:
-//                    Console.WriteLine("No command \"{0}\" available.", command);
-//                    break;
-//            }
-//        }
+        private void ParseCommands(Stopwatch stopwatch, string? command)
+        {
+            switch (command?.ToLower())
+            {
+                case "start":
+                    Console.WriteLine("Starting!");
+                    stopwatch.Start();
+                    break;
 
-        internal static void Main()
+                case "stop":
+                    Console.WriteLine("Stopping!");
+                    stopwatch.Stop();
+                    break;
+
+                case "show":
+                    Console.WriteLine("Time: " + stopwatch.ShowTime());
+                    break;
+
+                case "exit":
+                    Console.WriteLine("Seeya, bro!");
+                    Environment.Exit(0);
+                    break;
+
+                case "help":
+                    Help();
+                    break;
+
+                default:
+                    Console.WriteLine("No command \"{0}\" available.", command);
+                    break;
+            }
+        }
+
+        private static void Help()
         {
             Console.WriteLine($"Stopwatch {ProgramVersion}");
+            Console.WriteLine("Commands:\n" +
+                              "  -i     Interactive input\n" +
+                              "\n" +
+                              "If no input is specified, the stopwatch is automatic\n" +
+                              "until the program is stopped by the user.\n");
+        }
 
+        internal static void Main(string[] args)
+        {
+            if (args.Length > 0)
+            {
+                switch (args[0].ToLower())
+                {
+                    case "-h":
+                        Help();
+                        break;
+
+                    case "-i":
+                        Interactive();
+                        break;
+
+                    default:
+                        Help();
+                        Environment.Exit(0);
+                        break;
+                }
+            }
+            Automatic();
+        }
+
+        private static void Automatic()
+        {
             var stopwatch = new Stopwatch();
 
             while (true)
@@ -69,13 +111,18 @@ namespace Stopwatch
                 stopwatch.Stop();
                 Console.WriteLine("Duration: {0}", stopwatch.ShowTime());
             }
-//            Console.WriteLine("When you're ready.");
-//            while (true)
-//            {
-//                Console.Write("> ");
-//                var command = Console.ReadLine();
-//                ParseCommands(command);
-//            }
+        }
+
+        private static void Interactive()
+        {
+            var stopwatch = new Stopwatch();
+
+            while (true)
+            {
+                Console.Write("> ");
+                var command = Console.ReadLine();
+                stopwatch.ParseCommands(stopwatch, command);
+            }
         }
     }
 }
