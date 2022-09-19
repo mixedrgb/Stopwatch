@@ -7,7 +7,7 @@ namespace Stopwatch
         private static DateTime _stopTime;
         private static DateTime _startTime;
         private static bool _isStarted;
-        private const string ProgramVersion = "v0.01";
+        private const string ProgramVersion = "v0.05";
 
         public void Start()
         {
