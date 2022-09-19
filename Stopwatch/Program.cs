@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.Design;
-
-namespace Stopwatch
+﻿namespace Stopwatch
 {
     public class Stopwatch
     {
