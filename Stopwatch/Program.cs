@@ -75,31 +75,28 @@
 
         internal static void Main(string[] args)
         {
-            if (args.Length > 0)
+            if (0 >= args.Length)
+                Automatic(new Stopwatch());
+
+            switch (args[0].ToLower())
             {
-                switch (args[0].ToLower())
-                {
-                    case "-h":
-                        Help();
-                        break;
+                case "-h":
+                    Help();
+                    break;
 
-                    case "-i":
-                        Interactive();
-                        break;
+                case "-i":
+                    Interactive(new Stopwatch());
+                    break;
 
-                    default:
-                        Help();
-                        Environment.Exit(0);
-                        break;
-                }
+                default:
+                    Help();
+                    Environment.Exit(0);
+                    break;
             }
-            Automatic();
         }
 
-        private static void Automatic()
+        private static void Automatic(Stopwatch stopwatch)
         {
-            var stopwatch = new Stopwatch();
-
             while (true)
             {
                 var randomNumber = new Random();
@@ -110,10 +107,8 @@
             }
         }
 
-        private static void Interactive()
+        private static void Interactive(Stopwatch stopwatch)
         {
-            var stopwatch = new Stopwatch();
-
             while (true)
             {
                 Console.Write("> ");
