@@ -9,7 +9,7 @@ namespace Stopwatch
         private static bool _isStarted;
         private const string ProgramVersion = "v0.05";
 
-        public void Start()
+        private void Start()
         {
             if (_isStarted)
                 throw new InvalidOperationException("nO!");
@@ -18,7 +18,7 @@ namespace Stopwatch
             _startTime = DateTime.Now;
         }
 
-        public void Stop()
+        private void Stop()
         {
             if (!_isStarted)
                 throw new InvalidOperationException("nO!");
