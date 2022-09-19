@@ -53,7 +53,7 @@ namespace Stopwatch
 
         private static void ParseCommands(string? command)
         {
-            switch (command)
+            switch (command?.ToLower())
             {
                 case "start":
                     Start();
