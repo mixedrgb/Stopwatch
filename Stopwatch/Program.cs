@@ -51,7 +51,7 @@ namespace Stopwatch
             }
         }
 
-        private static void Commands(string? command)
+        private static void ParseCommands(string? command)
         {
             switch (command)
             {
@@ -76,17 +76,14 @@ namespace Stopwatch
 
         internal static void Main()
         {
-            string command = "";
             Console.WriteLine($"Stopwatch {ProgramVersion}");
             Console.WriteLine("When you're ready.");
             while (true)
             {
                 Console.Write("> ");
-                command = Console.ReadLine();
-                Commands(command);
+                var command = Console.ReadLine();
+                ParseCommands(command);
             }
-            //Thread.Sleep(new Random().Next(0,2000));
         }
-
     }
 }
